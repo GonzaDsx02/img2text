@@ -1,34 +1,62 @@
 import os
 from PIL import Image
 from pytesseract import *
+import subprocess
+import pyocr
+import pyocr.builders
+import io
+import sys
+import re
 
-folder = 'D:/ING EN SISTEMAS/Residencia/resources/'
-with os.scandir(folder) as files:
-    n = 1
+#!------------------------------ starter functions ------------------------------
+
+def getFiles():
+    arr = []
+    with os.scandir(rsrc_path) as files:
+        for file in files:
+            arr.append(file)
+    return arr
+
+#!------------------------------ global variables ------------------------------
+
+tool = pyocr.get_available_tools()[0]
+lang = 'spa'
+rsrc_path = 'D:/ING EN SISTEMAS/Residencia/resources/'
+output_path = 'D:/ING EN SISTEMAS/Residencia/crawler_python/output/'
+files = getFiles()
+output_files = []
+
+#used to remove the file extension while saving the txt. EX sushi.png -> sushi
+def second_group(m):
+    return m.group(1)
+
+def convert():
     for file in files:
-        
         # convert the img to text
-        print(f"procesing {file}")
+        print(f"procesing {file.name}")
         pytesseract.tesseract_cmd = r'D:\Pytesseract\tesseract.exe'
-        img = Image.open(folder+file.name)
+        img = Image.open(rsrc_path+file.name)
         lines = pytesseract.image_to_string(img)
-        
+        name = re.sub("(.*)(.{3}$)", second_group, file.name)
+
         # saves the output in output.txt file
-        name = f"output{n}.txt"
+        name = output_path+f"{name}txt"
+        output_files.append(name)
         with open(name, 'w') as f:
             for line in lines:
                 f.write(line)
-                #f.write('\n')
-        n+=1
     print("Done!")
 
+def filter1():
+    for file in output_files:
+        res=""
+        print(file)
+        with open(file) as f:
+            for line in f:
+                if "$" in line:
+                    res += line
+        f.close()
+        print(res)
 
-# Comprobación de seguridad, ejecutar sólo si se reciben 2 argumentos reales
-# if len(sys.argv) == 3:
-#     texto = sys.argv[1]
-#     repeticiones = int(sys.argv[2])
-#     for r in range(repeticiones):
-#         print(texto)
-# else:
-#     print("Error - Introduce los argumentos correctamente")
-#     print('Ejemplo: escribir_lineas.py "Texto" 5')
+convert()
+filter1()
