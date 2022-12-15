@@ -11,6 +11,7 @@ import re
 tool = pyocr.get_available_tools()[0]
 lang = 'spa'
 
+#used to remove the file extension while saving the txt. EX sushi.png -> sushi
 def second_group(m):
     return m.group(1)
 
@@ -26,7 +27,7 @@ with os.scandir(folder) as files:
         lines = pytesseract.image_to_string(img)
         name = re.sub("(.*)(.{3}$)", second_group, file.name)
         # saves the output in output.txt file
-        name = f"{name}.txt"
+        name = f"{name}txt"
         with open(name, 'w') as f:
             for line in lines:
                 f.write(line)
