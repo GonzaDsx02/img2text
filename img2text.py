@@ -48,7 +48,7 @@ def convert():
     print("Done!")
 
 def filter1():
-    for i,file in enumerate(output_files):
+    for file in output_files:
         print(i)
         res=""
         print(file)
