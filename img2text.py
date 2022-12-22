@@ -21,8 +21,8 @@ def getFiles():
 
 tool = pyocr.get_available_tools()[0]
 lang = 'spa'
-rsrc_path = 'D:/ING EN SISTEMAS/Residencia/resources/'
-output_path = 'D:/ING EN SISTEMAS/Residencia/crawler_python/output/'
+rsrc_path = 'resources/'
+output_path = 'output/'
 files = getFiles()
 output_files = []
 
@@ -45,18 +45,21 @@ def convert():
         with open(name, 'w') as f:
             for line in lines:
                 f.write(line)
-    print("Done!")
+    print("\nCONVERTION SUCCEDED!\n")
 
 def filter1():
-    for file in output_files:
+    for i,file in enumerate(output_files):
         res=""
-        print(file)
+        print(f"cleanning {files[i].name}")
         with open(file) as f:
             for line in f:
                 if "$" in line:
                     res += line
         f.close()
-        print(res)
+        with open(file, 'w') as f:
+            f.write(res)
+        #print(res)
+    print("\nFILTER 1 SUCCEDED!\n")
 
 convert()
 filter1()
