@@ -48,10 +48,9 @@ def convert():
     print("Done!")
 
 def filter1():
-    for file in output_files:
-        print(i)
+    for i,file in enumerate(output_files):
         res=""
-        print(file)
+        print(f"cleanning {files[i].name}")
         with open(file) as f:
             for line in f:
                 if "$" in line:
@@ -60,7 +59,7 @@ def filter1():
         with open(file, 'w') as f:
             f.write(res)
         #print(res)
-        print("done")
+    print("filter 1 completed!")
 
 convert()
 filter1()
