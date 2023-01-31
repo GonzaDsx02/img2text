@@ -21,8 +21,13 @@ def getFiles():
 
 tool = pyocr.get_available_tools()[0]
 lang = 'spa'
+
+client = ""
+menu_type = ""
 rsrc_path = 'resources/'
 output_path = 'output/'
+clients = ["man", "sens", "sone", "fushi"]
+menuTypes = ["f", "d"]
 files = getFiles()
 output_files = []
 
@@ -47,7 +52,7 @@ def convert():
                 f.write(line)
     print("\nCONVERTION SUCCEDED!\n")
 
-def filter1():
+def filter():
     for i,file in enumerate(output_files):
         res=""
         print(f"cleanning {files[i].name}")
@@ -61,5 +66,36 @@ def filter1():
         #print(res)
     print("\nFILTER 1 SUCCEDED!\n")
 
-convert()
-filter1()
+def validateArguments():
+    if len(sys.argv) == 3:
+        global client
+        global menu_type
+        client = sys.argv[1]
+        menu_type = sys.argv[2]
+        if client not in clients:
+            raise Exception("Client not found")
+        if menu_type not in menuTypes:
+            raise Exception("Invalid type of menu\nInsert \'d\' for drinks or \'f\' for food")
+    else:
+        print("Error - Missing arguments. (add <client> or <menu_type>)")
+        print('EX: python img2text.py restaurant1 food')
+        raise Exception("Invalid arguments")
+
+
+#Usage: python img2text.py <client> <type>
+def main():
+    try:
+        validateArguments()
+        print(f"Starting process for client={client} and type={menu_type}")
+        
+        print("Starting converter")
+        convert()
+        
+        #filter1()
+        print("Starting filters")
+    except Exception as e:
+        print(e)
+        print("\nSystem exit with error 1")
+
+if __name__ == "__main__":
+    main()
