@@ -13,7 +13,7 @@ OR
 
 ### Arguments
 
-    <client> can be one of the followings (ONLY HAVE TO CHOOSE JUST ONE):
+    <client> can be one of the followings (ONLY ONE):
 
     * man 
     * sens 
