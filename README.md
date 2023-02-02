@@ -19,9 +19,9 @@ OR
     * sens 
     * sone
     * fushi
+    (Customer names have been changed due to copyright issues)
 
     <type> could be "f" or "d" (making reference to food or drink menu types)
-
 
 ### Get your installed python version:
 

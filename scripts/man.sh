@@ -157,7 +157,7 @@ echo -e $final_line > ./output/desc.txt
 #!-------------------------------------- Removing all temporal files -------------------------------
 echo "Removing temporal files"
 
-rm ./output/manoka*.txt
+rm ./output/man*.txt
 rm ./output/tmp_cleaned_man_1.txt
 rm ./output/tmp_cleaned_man_2.txt
 rm ./output/tmp_man_1.txt
