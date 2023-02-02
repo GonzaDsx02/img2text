@@ -44,7 +44,7 @@ def convert():
         lines = pytesseract.image_to_string(img)
         name = re.sub("(.*)(.{3}$)", second_group, file.name)
 
-        # saves the output in output.txt file
+        # saves the output in .txt file
         name = output_path+f"{name}txt"
         output_files.append(name)
         with open(name, 'w') as f:
@@ -52,19 +52,21 @@ def convert():
                 f.write(line)
     print("\nCONVERTION SUCCEDED!\n")
 
-def filter():
-    for i,file in enumerate(output_files):
-        res=""
-        print(f"cleanning {files[i].name}")
-        with open(file) as f:
-            for line in f:
-                if "$" in line:
-                    res += line
-        f.close()
-        with open(file, 'w') as f:
-            f.write(res)
+def clean():
+    subprocess.call(['sh', './scripts/man.sh'])
+    print("cleaned file")
+    # for i,file in enumerate(output_files):
+    #     res=""
+    #     print(f"cleanning {files[i].name}")
+    #     with open(file) as f:
+    #         for line in f:
+    #             if "$" in line:
+    #                 res += line
+    #     f.close()
+    #     with open(file, 'w') as f:
+    #         f.write(res)
         #print(res)
-    print("\nFILTER 1 SUCCEDED!\n")
+    # print("\nFILTER 1 SUCCEDED!\n")
 
 def validateArguments():
     if len(sys.argv) == 3:
@@ -78,9 +80,8 @@ def validateArguments():
             raise Exception("Invalid type of menu\nInsert \'d\' for drinks or \'f\' for food")
     else:
         print("Error - Missing arguments. (add <client> or <menu_type>)")
-        print('EX: python img2text.py restaurant1 food')
+        print('EX: python img2text.py restaurant1 f')
         raise Exception("Invalid arguments")
-
 
 #Usage: python img2text.py <client> <type>
 def main():
@@ -92,7 +93,8 @@ def main():
         convert()
         
         #filter1()
-        print("Starting filters")
+        print("Starting filter script")
+        clean()
     except Exception as e:
         print(e)
         print("\nSystem exit with error 1")
