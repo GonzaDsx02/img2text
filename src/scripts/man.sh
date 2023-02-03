@@ -1,5 +1,5 @@
 # #!/bin/bash
-
+echo $(pwd)
 #!-------------------------------------- REMOVING FILES IF EXISTS ----------------------------------------
 find ./output -name desc.txt -exec rm {} \;
 find ./output -name names.txt -exec rm {} \;

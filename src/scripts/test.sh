@@ -1,0 +1,1 @@
+find ../../output/*.txt -exec echo {} \;
