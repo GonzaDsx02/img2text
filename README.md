@@ -5,6 +5,8 @@
 
 [Tesseract-OCR](https://github.com/tesseract-ocr/tessdoc#binaries)
 
+## After-install settings:
+
     pip install pytesseract
     pip install Pillow
 
