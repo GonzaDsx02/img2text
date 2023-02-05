@@ -5,6 +5,7 @@ import re
 import subprocess
 import csv 
 import pyocr
+import configparser
 import pyocr.builders
 from PIL import Image
 from pytesseract import *
@@ -40,7 +41,10 @@ def convert():
     for file in files:
         # convert the img to text
         print(f"procesing {file.name}")
-        pytesseract.tesseract_cmd = r'D:\Pytesseract\tesseract.exe'
+        config = configparser.ConfigParser()
+        config.read('.env')
+        inst=config.get('OCR','URL')
+        pytesseract.tesseract_cmd = r''+inst
         img = Image.open(rsrc_path+file.name)
         lines = pytesseract.image_to_string(img)
         name = re.sub("(.*)(.{3}$)", second_group, file.name)
@@ -113,13 +117,13 @@ def main():
         print("Starting converter")
         convert()
         
-        #filter1()
         print("Starting filter script")
         clean()
 
-        #add output to csv file here
+        # #add output to csv file here
 
         print("\nFiles cleaned successfully\n")
+        #print(config.get('OCR','URL'))
     except Exception as e:
         print(e)
         print("\nSystem exit with error 1")

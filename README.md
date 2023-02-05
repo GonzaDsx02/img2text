@@ -1,4 +1,11 @@
 # IMAGE TO TEXT CONVERTER
+
+## Getting Started
+### Install [Tesseract-OCR](https://github.com/tesseract-ocr/tessdoc#binaries) before running
+
+    pip install pytesseract
+    pip install Pillow
+
 ## Execute run.sh TO CONVERT MENU IMAGES TO TEXT.
 
     ./run.sh <client> <type>
