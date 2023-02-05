@@ -1,7 +1,9 @@
 # IMAGE TO TEXT CONVERTER
 
 ## Getting Started
-### Install [Tesseract-OCR](https://github.com/tesseract-ocr/tessdoc#binaries) before running
+### Install Tesseract-OCR before running
+
+    [Tesseract-OCR](https://github.com/tesseract-ocr/tessdoc#binaries)
 
     pip install pytesseract
     pip install Pillow
