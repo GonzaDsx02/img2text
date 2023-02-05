@@ -3,6 +3,7 @@ import io
 import sys
 import re
 import subprocess
+import csv 
 import pyocr
 import pyocr.builders
 from PIL import Image
@@ -54,8 +55,20 @@ def convert():
 
 def clean():
     global client
-    if client == "man":
+    global menu_type
+    if (client == "man" and menu_type == "f"):        
         subprocess.call(['sh', './src/scripts/man.sh'])
+        rows =[]
+        names = open('./output/names.txt','r').read().splitlines()
+        desc = open('./output/desc.txt','r').read().splitlines()
+        prices = open('./output/prices.txt','r').read().splitlines()
+        for i, n in enumerate(names):
+            rows.append({"Name":n, "Description":desc[i], "Price":prices[i]})
+        #print(rows)
+        createCsv(rows)
+        subprocess.call(['sh', './deleteoutput.sh'])
+    elif (client == "man" and menu_type == "d"):
+        subprocess.call(['sh', './src/scripts/man_f.sh'])
     elif client == "sens":
         print("Comming soon")
     elif client == "sone":
@@ -64,6 +77,17 @@ def clean():
         print("Comming soon")
     else:
         print(f"We dont have an script to clean files of this client ${client}")
+
+def createCsv(rows):
+    # field names 
+    global client
+    global menu_type
+    output_name=f"products_{client}_{menu_type}"
+    fields = ['Name', 'Description', 'Price'] 
+    with open(f'./output/{output_name}.csv', 'w', newline='') as file: 
+        writer = csv.DictWriter(file, fieldnames = fields)
+        writer.writeheader() 
+        writer.writerows(rows)
 
 def validateArguments():
     if len(sys.argv) == 3:
