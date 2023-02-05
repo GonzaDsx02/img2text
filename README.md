@@ -3,7 +3,7 @@
 ## Getting Started
 ### Install Tesseract-OCR before running
 
-    [Tesseract-OCR](https://github.com/tesseract-ocr/tessdoc#binaries)
+[Tesseract-OCR](https://github.com/tesseract-ocr/tessdoc#binaries)
 
     pip install pytesseract
     pip install Pillow
