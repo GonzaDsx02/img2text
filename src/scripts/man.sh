@@ -1,5 +1,5 @@
 # #!/bin/bash
-echo $(pwd)
+
 #!-------------------------------------- REMOVING FILES IF EXISTS ----------------------------------------
 find ./output -name desc.txt -exec rm {} \;
 find ./output -name names.txt -exec rm {} \;
@@ -162,3 +162,5 @@ rm ./output/tmp_cleaned_man_1.txt
 rm ./output/tmp_cleaned_man_2.txt
 rm ./output/tmp_man_1.txt
 rm ./output/tmp_desc.txt
+
+find ./resources/*.jpg -exec mv {} ./converted/ \;

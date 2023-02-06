@@ -7,6 +7,11 @@
 
 ## After-install settings:
 
+### set installation URL in the project's .env file
+    [OCR]
+    URL=D:\Pytesseract\tesseract.exe (Your URL here)
+
+### Install required pip libraries:
     pip install pytesseract
     pip install Pillow
 

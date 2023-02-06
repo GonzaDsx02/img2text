@@ -72,7 +72,15 @@ def clean():
         createCsv(rows)
         subprocess.call(['sh', './deleteoutput.sh'])
     elif (client == "man" and menu_type == "d"):
-        subprocess.call(['sh', './src/scripts/man_f.sh'])
+        subprocess.call(['sh', './src/scripts/man_d.sh'])
+        rows =[]
+        prods = open('./output/names_descriptions.txt','r').read().splitlines()
+        prices = open('./output/prices.txt','r').read().splitlines()
+        for i, prod in enumerate(prods):
+            cols = prod.split("|")
+            rows.append({"Name":cols[0], "Description":cols[1], "Price":prices[i]})
+        createCsv(rows)
+        subprocess.call(['sh', './deleteoutput.sh'])
     elif client == "sens":
         print("Comming soon")
     elif client == "sone":

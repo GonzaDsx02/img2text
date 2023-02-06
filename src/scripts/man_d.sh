@@ -1,5 +1,3 @@
-echo "we are inside of man_f.sh"
-
 find ./output -name desc.txt -exec rm {} \;
 find ./output -name names.txt -exec rm {} \;
 find ./output -name prices.txt -exec rm {} \;
@@ -83,3 +81,5 @@ echo -e $new_line > ./output/names_descriptions.txt
 
 rm ./output/tmp_cleaned_man_1.txt
 rm ./output/man*.txt
+
+find ./resources/*.jpg -exec mv {} ./converted/ \;
