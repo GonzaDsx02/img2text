@@ -57,11 +57,9 @@ def convert():
                 f.write(line)
     print("\nCONVERTION SUCCEDED!\n")
 
-def clean():
-    global client
-    global menu_type
+def exportData(client, menu_type):
     if (client == "man" and menu_type == "f"):        
-        subprocess.call(['sh', './src/scripts/man.sh'])
+        #subprocess.call(['sh', './src/scripts/man.sh'])
         rows =[]
         names = open('./output/names.txt','r').read().splitlines()
         desc = open('./output/desc.txt','r').read().splitlines()
@@ -125,12 +123,12 @@ def main():
         print("Starting converter")
         convert()
         
-        print("Starting filter script")
-        clean()
+        #print("Starting filter script")
+        #clean()
 
         # #add output to csv file here
 
-        print("\nFiles cleaned successfully\n")
+        print("\nFiles converted successfully\n")
         #print(config.get('OCR','URL'))
     except Exception as e:
         print(e)

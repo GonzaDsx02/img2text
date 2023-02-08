@@ -14,6 +14,7 @@
 ### Install required pip libraries:
     pip install pytesseract
     pip install Pillow
+    pip install pyocr
 
 ## Execute run.sh TO CONVERT MENU IMAGES TO TEXT.
 
