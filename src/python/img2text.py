@@ -37,11 +37,10 @@ output_files = []
 def second_group(m):
     return m.group(1)
 
-def convert():
+def convert(config):
     for file in files:
         # convert the img to text
         print(f"procesing {file.name}")
-        config = configparser.ConfigParser()
         config.read('.env')
         inst=config.get('OCR','URL')
         pytesseract.tesseract_cmd = r''+inst
@@ -105,8 +104,17 @@ def validateArguments():
         menu_type = sys.argv[2]
         if client not in clients:
             raise Exception("Client not found")
-        if menu_type not in menuTypes:
+        elif menu_type not in menuTypes:
             raise Exception("Invalid type of menu\nInsert \'d\' for drinks or \'f\' for food")
+        else:
+            config = configparser.ConfigParser()
+            config.add_section('CSV')
+            config.set('CSV', 'CLIENT', f'{client}')
+            config.set('CSV', 'TYPE', f'{menu_type}')
+            with open('.properties', 'w') as configfile:
+                config.write(configfile)
+            configfile.close()
+            return config
     else:
         print("Error - Missing arguments. (add <client> or <menu_type>)")
         print('EX: python img2text.py restaurant1 f')
@@ -115,19 +123,13 @@ def validateArguments():
 #Usage: python img2text.py <client> <type>
 def main():
     try:
-        validateArguments()
+        conf = validateArguments()
         print(f"Starting process for client={client} and type={menu_type}")
         
         print("Starting converter")
-        convert()
-        
-        #print("Starting filter script")
-        #clean()
-
-        # #add output to csv file here
+        convert(conf)
 
         print("\nFiles converted successfully\n")
-        #print(config.get('OCR','URL'))
     except Exception as e:
         print(e)
         print("\nSystem exit with error 1")
