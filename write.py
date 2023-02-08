@@ -1,5 +1,2 @@
-lines = ['Readme', 'How to write text files in Python']
-with open('readme.txt', 'w') as f:
-    for line in lines:
-        f.write(line)
-        f.write('\n')
+from src.python.img2text import exportData; 
+print(exportData("man","f"))

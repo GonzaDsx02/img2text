@@ -67,7 +67,7 @@ def exportData(client, menu_type):
         for i, n in enumerate(names):
             rows.append({"Name":n, "Description":desc[i], "Price":prices[i]})
         #print(rows)
-        createCsv(rows)
+        createCsv(rows, client, menu_type)
         subprocess.call(['sh', './deleteoutput.sh'])
     elif (client == "man" and menu_type == "d"):
         subprocess.call(['sh', './src/scripts/man_d.sh'])
@@ -88,10 +88,8 @@ def exportData(client, menu_type):
     else:
         print(f"We dont have an script to clean files of this client ${client}")
 
-def createCsv(rows):
+def createCsv(rows, client, menu_type):
     # field names 
-    global client
-    global menu_type
     output_name=f"products_{client}_{menu_type}"
     fields = ['Name', 'Description', 'Price'] 
     with open(f'./output/{output_name}.csv', 'w', newline='') as file: 
