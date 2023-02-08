@@ -1,0 +1,1 @@
+find ./resources/*.jpg -exec mv {} ./converted/ \;
