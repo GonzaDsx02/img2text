@@ -5,3 +5,7 @@
 *.jpg
 
 *.png
+
+__pycache__
+
+.properties

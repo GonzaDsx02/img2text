@@ -1,4 +1,4 @@
-# #!/bin/bash
+#!/bin/bash
 
 #!-------------------------------------- REMOVING FILES IF EXISTS ----------------------------------------
 find ./output -name desc.txt -exec rm {} \;
@@ -10,12 +10,13 @@ find ./output/*.txt -exec sed -i '/^$/d' {} \;
 
 #remove the first 2 lines of the txt file 
 #find ./output/*.txt -exec tail -n +3 {} > ./output/cleaned_1.txt \;
+#find ./output/*.txt -exec chmod +x {} \;
 find ./output/*.txt -exec gawk -i inplace 'NR>2' {} \;
 
 #remove tmp file if exist
 find ./output -name tmp_man_1.txt -exec rm {} \;
 #remove the last 3 rows and save the result in a temporal file
-find ./output/*.txt -exec head -n -5 {} > ./output/tmp_man_1.txt \;
+find ./output/*.txt -exec head -n -6 {} > ./output/tmp_man_1.txt \;
 
 #!-------------------------------------- REMOVING DOLLAR AND PRICE ---------------------------------
 echo "Removing dollar sign and prices"

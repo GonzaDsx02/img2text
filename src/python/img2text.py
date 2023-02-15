@@ -58,7 +58,6 @@ def convert(config):
 
 def exportData(client, menu_type):
     if (client == "man" and menu_type == "f"):        
-        #subprocess.call(['sh', './src/scripts/man.sh'])
         rows =[]
         names = open('./output/names.txt','r').read().splitlines()
         desc = open('./output/desc.txt','r').read().splitlines()
@@ -69,14 +68,13 @@ def exportData(client, menu_type):
         createCsv(rows, client, menu_type)
         subprocess.call(['sh', './deleteoutput.sh'])
     elif (client == "man" and menu_type == "d"):
-        subprocess.call(['sh', './src/scripts/man_d.sh'])
         rows =[]
         prods = open('./output/names_descriptions.txt','r').read().splitlines()
         prices = open('./output/prices.txt','r').read().splitlines()
         for i, prod in enumerate(prods):
             cols = prod.split("|")
             rows.append({"Name":cols[0], "Description":cols[1], "Price":prices[i]})
-        createCsv(rows)
+        createCsv(rows, client, menu_type)
         subprocess.call(['sh', './deleteoutput.sh'])
     elif client == "sens":
         print("Comming soon")
@@ -92,9 +90,10 @@ def createCsv(rows, client, menu_type):
     output_name=f"products_{client}_{menu_type}"
     fields = ['Name', 'Description', 'Price'] 
     with open(f'./output/{output_name}.csv', 'w', newline='') as file: 
-        writer = csv.DictWriter(file, fieldnames = fields)
+        writer = csv.DictWriter(file, delimiter="|", fieldnames = fields, quoting=csv.QUOTE_NONE)
         writer.writeheader() 
         writer.writerows(rows)
+    print("CSV created!")
 
 def validateArguments():
     if len(sys.argv) == 3:

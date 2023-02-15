@@ -56,15 +56,3 @@ Set static version of python
 Run normally as 
 
     ./run.sh <client> <type>
-### Pass python version as an argument
-You can pass the python version to the run.sh script as well.
-
-    version=$1
-    client=$2
-    type=$3
-
-    $version src/python/img2text.py $client $type
-
-Running example:
-
-    python3 run.sh man f
