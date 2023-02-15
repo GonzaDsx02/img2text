@@ -1,1 +1,1 @@
-find ./resources/*.jpg -exec mv {} ./converted/ \;
+Are we restored?
