@@ -77,8 +77,11 @@ do
     fi
 done < "$file"
 
-echo -e $new_line > ./output/names_descriptions.txt
+echo -e $new_line > ./output/tmp_names_descriptions.txt
 
+find ./output/*.txt -name tmp_names_descriptions.txt -exec sed 's/,/ /g' {} > output/names_descriptions.txt \; 
+
+rm ./output/tmp_names_descriptions.txt
 rm ./output/tmp_cleaned_man_1.txt
 rm ./output/man*.txt
 
